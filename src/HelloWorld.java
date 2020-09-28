@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class HelloWorld {
     public static void main (String[] args){
         int myFavoriteNumber = 4;
@@ -34,5 +35,14 @@ public class HelloWorld {
         //experiment += 1;
         System.out.println(experiment);
         System.out.println();
+        String greeting = "Salutations";
+        String name = "Bob";
+        System.out.printf("%s, %s!", greeting, name);
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter something: ");
+        String userInput = scanner.next();
+
+        System.out.println("You entered: --> \"" + userInput + "\" <--");
     }
 }
