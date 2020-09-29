@@ -30,16 +30,21 @@ public class ConsoleExercises {
         System.out.println("Type a sentence :");
         String str = sentence.nextLine();
         System.out.println(str);*/
-        /*Scanner measure = new Scanner(System.in);
+        Scanner measure = new Scanner(System.in);
         System.out.println("What is the length, width, and height of the room?");
         String userInput = measure.nextLine();
         System.out.println(userInput);
-        String[] userNumbers = userInput.split(" ");
-        float length = Float.parseFloat(userNumbers[0]);
+        Scanner different = new Scanner(userInput);
+        different.useDelimiter("m");
+        float length = Float.parseFloat(different.next());
+        float width = Float.parseFloat(different.next());
+        float height = Float.parseFloat(different.next());
+        //String[] userNumbers = userInput.split(" ");
+        /*float length = Float.parseFloat(userNumbers[0]);
         float width = Float.parseFloat(userNumbers[1]);
-        float height = Float.parseFloat(userNumbers[2]);
+        float height = Float.parseFloat(userNumbers[2]);*/
         System.out.println("The area of the room is: " + length * width);
         System.out.println("The perimeter of the room is : " + (length * 2 + width * 2));
-        System.out.println("The volume of the room is : " + (length * width * height));*/
+        System.out.println("The volume of the room is : " + (length * width * height));
     }
 }
