@@ -37,11 +37,11 @@ public class HelloWorld {
         System.out.println();
         String greeting = "Salutations";
         String name = "Bob";
-        System.out.printf("%s, %s!", greeting, name);
+        System.out.printf("%s, %s!", name, greeting);
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter something: ");
-        String userInput = scanner.next();
+        System.out.println("Enter something: ");
+        String userInput = scanner.nextLine();
 
         System.out.println("You entered: --> \"" + userInput + "\" <--");
     }
