@@ -29,7 +29,7 @@ public class MethodsExercises {
         System.out.println(num1 % num2);
     }
     public static int getInteger(int min, int max){
-        System.out.print("Enter a number between 1 and 10: ");
+        System.out.println("Enter a number between 1 and 10: ");
         Scanner range = new Scanner(System.in);
         int input = range.nextInt();
         if (input > max || input < min){
@@ -56,8 +56,7 @@ public class MethodsExercises {
             for(long d = 1; d<=i; d++){
                 if(d == i){
                     output*= d;
-                    //System.out.printf("%d = %d\n", d, output);
-                    System.out.print(d + " = " + output + "\n");
+                    System.out.printf("%d = %d\n", d, output);
                 } else {
                    output*= d;
                     System.out.print(d + " x ");
@@ -105,7 +104,7 @@ public class MethodsExercises {
         modulus(5,2);*/
         //System.out.print("Enter a number between 1 and 10: ");
         //int userInput = getInteger(1, 10);
-        //factorial();
-        dice();
+        factorial();
+        //dice();
     }
 }
