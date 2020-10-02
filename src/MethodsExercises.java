@@ -95,8 +95,8 @@ public class MethodsExercises {
         } else {
             System.out.println("Have a nice day!");
         }
-
     }
+
     public static void main(String[] args){
         /*addition(5,2);
         subtraction(5,2);
