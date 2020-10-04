@@ -97,11 +97,11 @@ public class MethodsExercises {
     }
 
     public static void main(String[] args){
-        /*addition(5,2);
+        addition(5,2);
         subtraction(5,2);
         System.out.println(multiplication(5,2));
         division(5,0);
-        modulus(5,2);*/
+        modulus(5,2);
         //System.out.print("Enter a number between 1 and 10: ");
         //int userInput = getInteger(1, 10);
         factorial();
