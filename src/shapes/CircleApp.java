@@ -12,7 +12,7 @@ public class CircleApp {
             Input response = new Input();
             boolean userInput = response.yesNo("Would you like to continue? y/N");
             if(!userInput) {
-                System.out.println(count);
+                System.out.println("You have created " + count + " circle(s).");
                break;
                }
         }
