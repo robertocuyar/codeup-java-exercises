@@ -7,17 +7,25 @@ public class Input {
         this.scanner = new Scanner(System.in);
     }
     public String getString(){
-        System.out.println("Type a response:");
+        //System.out.println("Type a response:");
         return scanner.nextLine();
     }
+    public String getString(String prompt){
+        System.out.println(prompt);
+       return getString();
+    }
     public boolean yesNo(){
-        System.out.println("Enter y/N: ");
+        //System.out.println("Enter y/N: ");
         String input = scanner.nextLine();
         if(input.equalsIgnoreCase("y")|| input.equalsIgnoreCase("yes")){
             return true;
         } else {
             return false;
         }
+    }
+    public boolean yesNo(String prompt) {
+        System.out.println(prompt);
+        return yesNo();
     }
     public int getInt(int min, int max){
         System.out.println("Enter a number between " + min + " and " + max + ":");
@@ -29,12 +37,16 @@ public class Input {
         }
     }
     public int getInt(){
-        System.out.println("Enter a number :");
+        //System.out.println("Enter a number :");
         return scanner.nextInt();
         }
+    public int getInt(String prompt) {
+        System.out.println(prompt);
+        return getInt();
+    }
     public double getDouble(double min, double max){
         System.out.println("Enter a number between " + min + " and " + max + ":");
-        double input = scanner.nextInt();
+        double input = scanner.nextDouble();
         if(input < min || input > max){
             return getDouble(min, max);
         } else {
@@ -42,8 +54,12 @@ public class Input {
         }
     }
     public double getDouble(){
-        System.out.println("Enter a number :");
+        //System.out.println("Enter a number :");
         return scanner.nextDouble();
     }
+    public double getDouble(String prompt) {
+        System.out.println(prompt);
+        return getDouble();
     }
+}
 
