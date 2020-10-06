@@ -61,5 +61,13 @@ public class Input {
         System.out.println(prompt);
         return getDouble();
     }
+
+    public static class OtherPerson {
+            public String name;
+
+            public OtherPerson(String nam) {
+                this.name = nam;
+            }
+    }
 }
 
