@@ -1,5 +1,6 @@
 package grades;
 import java.util.HashMap;
+import java.util.ArrayList;
 import util.Input;
 
 
@@ -29,10 +30,10 @@ public class GradesApplication {
         students.put("johnNY44", johnny);
         students.put("bextravagant", bonnie);
 
+    updateAttendance(students);
         System.out.println("Welcome!");
         spacing();
         studentApp(students);
-
 
     }
     public static void studentApp(HashMap<String, Student> object){
@@ -102,5 +103,16 @@ public class GradesApplication {
     }
     public static void spacing (){
         System.out.printf("%n");
+    }
+    public static void updateAttendance (HashMap<String, Student> object){
+        Input prompt = new Input();
+        String strResponse = prompt.getString("Enter a student name to update their attendance.");
+       for(Student student : object.values()){
+           if (strResponse.equalsIgnoreCase(student.getName())){
+               String enterDate = prompt.getString("Enter date of attendance.");
+               //String enterInfo = prompt.getString()
+
+           }
+       }
     }
 }

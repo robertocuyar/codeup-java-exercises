@@ -1,14 +1,17 @@
 package grades;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Student {
     private String name;
     private ArrayList <Integer> grades;
+    private HashMap <String, String> attendance;
 
     public Student(String name){
         this.name = name;
         this.grades = new ArrayList<>();
+        this.attendance = new HashMap<>();
     }
 
     public String getName(){
@@ -28,6 +31,9 @@ public class Student {
             output += grade;
         }
         return output/this.grades.size();
+    }
+    public void recordAttendance(String date, String value){
+        this.attendance.put(date, value);
     }
     public static void main(String[]args){
 Student billy = new Student("Billy");
