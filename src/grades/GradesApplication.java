@@ -2,6 +2,7 @@ package grades;
 import java.util.HashMap;
 import util.Input;
 
+
 public class GradesApplication {
     public static void main(String[] args) {
         HashMap <String, Student> students = new HashMap<>();
@@ -35,13 +36,14 @@ public class GradesApplication {
 
     }
     public static void studentApp(HashMap<String, Student> object){
+
         System.out.println("Here are the GitHub usernames of our students:");
         spacing();
         userNameDisplay(object);
         spacing();
         spacing();
         Input strResponse = new Input();
-        String userInput = strResponse.getString("What student would you like to see more information on?");
+        String userInput = strResponse.getString("What student would you like to see more information on? [Type 'all' to see all student grades]");
         if(object.containsKey(userInput)){
             System.out.printf("Name: %s - GitHub Username: %s\n", object.get(userInput).getName(), userInput);
             System.out.printf("Current Average: %f\n", object.get(userInput).getGradeAverage());
@@ -56,6 +58,35 @@ public class GradesApplication {
                 studentApp(object);
             } else {
                 System.out.println("Thank you! Have a wonderful day!");
+            }
+        }else if(userInput.equalsIgnoreCase("all")){
+            int output = 0;
+            double average;
+            double count = 0;
+            for (Student name: object.values()){
+                System.out.printf("%s: ", name.getName());
+                for(Integer grade : name.getGrades()){
+                    System.out.print(grade + " ");
+                    output+= grade;
+                    count++;
+                }
+                spacing();
+            }
+            average = output;
+            System.out.println("The class average is: " + (average / count));
+            spacing();
+           boolean csvResponse = strResponse.yesNo("Would you like a preview of the data in CSV format?");
+           spacing();
+            if (csvResponse){
+                System.out.println("name,github_username,average");
+                for (String username: object.keySet()){
+                    System.out.printf("%s,%s,%05.2f\n",object.get(username).getName(), username, object.get(username).getGradeAverage());
+                    System.out.println("Going back to the main menu...");
+                    studentApp(object);
+                }
+            } else {
+                System.out.println("Going back to the main menu...");
+                studentApp(object);
             }
         } else {
             System.out.printf("Sorry, no student found with the GitHub username of \"%s\".\n", userInput);
