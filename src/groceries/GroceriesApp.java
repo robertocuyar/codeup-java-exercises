@@ -86,30 +86,29 @@ public static int groceryListQuan (Input prompt){
        int userNum = prompt.getInt("How many of the item do you want?");
        return userNum;
 }
-public static void addList(HashMap<Integer, Grocery> shoppingList, int count, ArrayList<String> array, Input prompt){
+public static void addList(HashMap<Integer, Grocery> shoppingList, int count, ArrayList<String> array, Input prompt) {
     shoppingList.put(count, new Grocery());
     shoppingList.get(count).setCategory(groceryListCat(array));
     shoppingList.get(count).setName(groceryListName());
     shoppingList.get(count).setQuantity(groceryListQuan(prompt));
     Input response = new Input();
     boolean thirdConfirm = response.yesNo("Would you like to add another item to your grocery list?");
-    if (thirdConfirm){
+    if (thirdConfirm) {
         addList(shoppingList, count + 1, array, prompt);
     } else {
         ArrayList<String> names = new ArrayList<>();
-        for(Grocery item : shoppingList.values()){
-           names.add(item.getName());
-        }
-        System.out.println(names);
-        Collections.sort(names);
         for (Grocery item : shoppingList.values()) {
-          for(String name : names){
-              if (name.equalsIgnoreCase(item.getName())){
-                  System.out.println(item.getName() + " " + item.getCategory() + " " + item.getQuantity());
-              }
-          }
+            names.add(item.getName());
+        }
+        Collections.sort(names);
+        for (String name : names) {
+            for (Grocery item : shoppingList.values()) {
+                if (item.getName().equalsIgnoreCase(name)) {
+                    System.out.println(item.getName() + " " + item.getCategory() + " " + item.getQuantity());
+                }
+            }
         }
     }
+}
+}
 
-}
-}

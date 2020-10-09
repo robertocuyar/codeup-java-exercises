@@ -6,11 +6,13 @@ public class Square extends Quadrilateral {
         super(side, side);
         this.side = side;
     }
-      public double setLength(double length){
-       return this.length = length;
+      public void setLength(double length){
+       this.length = length;
+       this.width = length;
     }
-    public double setWidth(double width){
-        return this.width = width;
+    public void setWidth(double width){
+        this.width = width;
+        this.length = width;
     }
 
     public double getArea(){
