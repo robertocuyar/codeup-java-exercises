@@ -33,7 +33,29 @@ public class Student {
         return output/this.grades.size();
     }
     public void recordAttendance(String date, String value){
+        if (value.equalsIgnoreCase("P") || value.equalsIgnoreCase("A")) {
         this.attendance.put(date, value);
+        } else {
+            System.out.println("Error. Value is not an entry of 'P' or 'A'.");
+        }
+    }
+    public double attendancePercent (){
+        double counter = 0;
+        for (String value : this.attendance.values()){
+            if(value.equalsIgnoreCase("P")){
+                counter++;
+            }
+        }
+        return counter / this.attendance.keySet().size() * 100 ;
+    }
+    public ArrayList<String> absentSearch(){
+        ArrayList<String> absentDays = new ArrayList<>();
+        for (String key : this.attendance.keySet()){
+            if(this.attendance.get(key).equalsIgnoreCase("A")){
+                absentDays.add(key);
+            }
+        }
+        return absentDays;
     }
     public static void main(String[]args){
 Student billy = new Student("Billy");
