@@ -1,6 +1,7 @@
 package groceries;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Collections;
 
 import util.Input;
 
@@ -17,23 +18,16 @@ public class GroceriesApp {
         categories.add("Produce");
         categories.add("Other");
 
-        groceryApp(categories);
+        groceryApp(categories, 1);
     }
-public static void groceryApp(ArrayList<String> array){
+public static void groceryApp(ArrayList<String> array, int count){
     HashMap<Integer, Grocery> shoppingList = new HashMap<>();
-    int listItem = 1;
         Input prompt = new Input();
         boolean userConfirm = prompt.yesNo("Would you like to create a grocery list?");
         if (userConfirm){
             boolean secondConfirm = prompt.yesNo("Would you like to enter a new item to your grocery list?");
             if (secondConfirm){
-                shoppingList.put(listItem, new Grocery(groceryListCat(array,prompt)));
-                shoppingList.get(listItem).setName(groceryListName(prompt));
-
-
-
-
-
+                addList(shoppingList, count, array, prompt);
             } else {
                 System.out.println("Come visit us again. Have a nice day!");
                 System.exit(0);
@@ -45,11 +39,12 @@ public static void groceryApp(ArrayList<String> array){
 public static void spacing(){
     System.out.printf("%n");
 }
-public static String groceryListCat (ArrayList<String> array, Input prompt){
+public static String groceryListCat (ArrayList<String> array){
     for(int list = 0; list < array.size(); list++){
         System.out.printf("%d : %s\n", list + 1, array.get(list));
     }
-    String userInput = prompt.getString("Type in the number of the category the item belongs in.");
+    Input response = new Input();
+    String userInput = response.getString("Type in the number of the category the item belongs in.");
     switch (userInput){
         case "1":
             return "Beverages";
@@ -71,19 +66,50 @@ public static String groceryListCat (ArrayList<String> array, Input prompt){
             return "Other";
         default:
             System.out.println("Please enter a valid number from the categories list.");
-            groceryListCat(array, prompt);
-            return null;
+            groceryListCat(array);
+            return "error";
     }
 
 }
-public static String groceryListName(Input prompt){
+public static String groceryListName(){
+        Input prompt = new Input();
         String userStr = prompt.getString("Enter the name of the name of the grocery item.");
         if(userStr.isEmpty()){
             System.out.println("Please enter a valid name for the grocery item.");
-            groceryListName(prompt);
+            groceryListName();
             return null;
         } else {
             return userStr;
         }
+}
+public static int groceryListQuan (Input prompt){
+       int userNum = prompt.getInt("How many of the item do you want?");
+       return userNum;
+}
+public static void addList(HashMap<Integer, Grocery> shoppingList, int count, ArrayList<String> array, Input prompt){
+    shoppingList.put(count, new Grocery());
+    shoppingList.get(count).setCategory(groceryListCat(array));
+    shoppingList.get(count).setName(groceryListName());
+    shoppingList.get(count).setQuantity(groceryListQuan(prompt));
+    Input response = new Input();
+    boolean thirdConfirm = response.yesNo("Would you like to add another item to your grocery list?");
+    if (thirdConfirm){
+        addList(shoppingList, count + 1, array, prompt);
+    } else {
+        ArrayList<String> names = new ArrayList<>();
+        for(Grocery item : shoppingList.values()){
+           names.add(item.getName());
+        }
+        System.out.println(names);
+        Collections.sort(names);
+        for (Grocery item : shoppingList.values()) {
+          for(String name : names){
+              if (name.equalsIgnoreCase(item.getName())){
+                  System.out.println(item.getName() + " " + item.getCategory() + " " + item.getQuantity());
+              }
+          }
+        }
+    }
+
 }
 }

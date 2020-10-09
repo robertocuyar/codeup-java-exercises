@@ -5,9 +5,9 @@ public class Grocery {
     private String category;
     private int quantity;
 
-    public Grocery (String aCategory) {
+    public Grocery () {
         //this.name = aName;
-        this.category = aCategory;
+        //this.category = aCategory;
         //this.quantity = aQuantity;
     }
 
