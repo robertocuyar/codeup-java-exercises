@@ -61,7 +61,7 @@ public static String groceryListCat (ArrayList<String> array){
         case "7":
             return "Meat";
         case "8":
-                return "Produce";
+            return "Produce";
         case "9":
             return "Other";
         default:
@@ -103,12 +103,31 @@ public static void addList(HashMap<Integer, Grocery> shoppingList, int count, Ar
         Collections.sort(names);
         for (String name : names) {
             for (Grocery item : shoppingList.values()) {
-                if (item.getName().equalsIgnoreCase(name)) {
-                    System.out.println(item.getName() + " " + item.getCategory() + " " + item.getQuantity());
+                if (item.getName().equalsIgnoreCase(name) && item.getCategory().equalsIgnoreCase("Beverages")) {
+                    printOut(item);
+                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Bread/Bakery")) {
+                    printOut(item);
+                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Canned/Jarred Goods")) {
+                    printOut(item);
+                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Dairy")) {
+                    printOut(item);
+                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Baking Goods")) {
+                    printOut(item);
+                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Frozen Goods")) {
+                    printOut(item);
+                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Meat")) {
+                    printOut(item);
+                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Produce")) {
+                    printOut(item);
+                } else{
+                    printOut(item);
                 }
             }
         }
     }
+}
+public static void printOut (Grocery item){
+    System.out.println(item.getName() + " " + item.getCategory() + " " + item.getQuantity());
 }
 }
 

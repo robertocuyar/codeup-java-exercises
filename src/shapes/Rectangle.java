@@ -18,10 +18,10 @@ public class Rectangle extends Quadrilateral implements Measurable {
         return this.length * 2 + this.width * 2;
     }
 
-    public double setLength(double length){
-       return this.length = length;
+    public void setLength(double length){
+        this.length = length;
     }
-    public double setWidth(double width){
-        return this.width = width;
+    public void setWidth(double width){
+        this.width = width;
     }
 }
