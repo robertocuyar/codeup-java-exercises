@@ -83,8 +83,8 @@ public static String groceryListName(){
         }
 }
 public static int groceryListQuan (Input prompt){
-       int userNum = prompt.getInt("How many of the item do you want?");
-       return userNum;
+       return prompt.getInt("How many of the item do you want?");
+
 }
 public static void addList(HashMap<Integer, Grocery> shoppingList, int count, ArrayList<String> array, Input prompt) {
     shoppingList.put(count, new Grocery());
@@ -97,29 +97,18 @@ public static void addList(HashMap<Integer, Grocery> shoppingList, int count, Ar
         addList(shoppingList, count + 1, array, prompt);
     } else {
         ArrayList<String> names = new ArrayList<>();
-        for (Grocery item : shoppingList.values()) {
-            names.add(item.getName());
-        }
-        Collections.sort(names);
+        names.addAll(sortGrocery(shoppingList, "Beverages"));
+        names.addAll(sortGrocery(shoppingList, "Bread/Bakery"));
+        names.addAll(sortGrocery(shoppingList, "Canned/Jarred Goods"));
+        names.addAll(sortGrocery(shoppingList, "Dairy"));
+        names.addAll(sortGrocery(shoppingList, "Baking Goods"));
+        names.addAll(sortGrocery(shoppingList, "Frozen Goods"));
+        names.addAll(sortGrocery(shoppingList, "Meat"));
+        names.addAll(sortGrocery(shoppingList, "Produce"));
+        names.addAll(sortGrocery(shoppingList, "Other"));
         for (String name : names) {
             for (Grocery item : shoppingList.values()) {
-                if (item.getName().equalsIgnoreCase(name) && item.getCategory().equalsIgnoreCase("Beverages")) {
-                    printOut(item);
-                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Bread/Bakery")) {
-                    printOut(item);
-                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Canned/Jarred Goods")) {
-                    printOut(item);
-                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Dairy")) {
-                    printOut(item);
-                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Baking Goods")) {
-                    printOut(item);
-                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Frozen Goods")) {
-                    printOut(item);
-                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Meat")) {
-                    printOut(item);
-                } else if (item.getName().equalsIgnoreCase(name) && item.getCategory().equals("Produce")) {
-                    printOut(item);
-                } else{
+                if (item.getName().equalsIgnoreCase(name)) {
                     printOut(item);
                 }
             }
@@ -128,6 +117,16 @@ public static void addList(HashMap<Integer, Grocery> shoppingList, int count, Ar
 }
 public static void printOut (Grocery item){
     System.out.println(item.getName() + " " + item.getCategory() + " " + item.getQuantity());
+}
+public static ArrayList<String> sortGrocery (HashMap<Integer, Grocery> data, String str){
+    ArrayList<String> addition = new ArrayList<>();
+        for (Grocery item: data.values()){
+            if(item.getCategory().equals(str)) {
+               addition.add(item.getName());
+            }
+        }
+    Collections.sort(addition);
+        return addition;
 }
 }
 
