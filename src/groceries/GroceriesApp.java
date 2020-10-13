@@ -118,10 +118,10 @@ public static void addList(HashMap<Integer, Grocery> shoppingList, int count, Ar
 public static void printOut (Grocery item){
     System.out.println(item.getName() + " " + item.getCategory() + " " + item.getQuantity());
 }
-public static ArrayList<String> sortGrocery (HashMap<Integer, Grocery> data, String str){
+public static ArrayList<String> sortGrocery (HashMap<Integer, Grocery> data, String cat){
     ArrayList<String> addition = new ArrayList<>();
         for (Grocery item: data.values()){
-            if(item.getCategory().equals(str)) {
+            if(item.getCategory().equals(cat)) {
                addition.add(item.getName());
             }
         }
