@@ -1,4 +1,5 @@
 package util;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Input {
@@ -37,8 +38,14 @@ public class Input {
         }
     }
     public int getInt(){
-        //System.out.println("Enter a number :");
-        return scanner.nextInt();
+        try{
+            return scanner.nextInt();
+        }
+        catch (InputMismatchException e){
+            System.out.println("Please enter a valid number");
+            scanner.next();
+            return getInt();
+        }
         }
     public int getInt(String prompt) {
         System.out.println(prompt);

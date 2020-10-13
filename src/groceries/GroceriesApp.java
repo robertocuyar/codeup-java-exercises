@@ -49,25 +49,25 @@ public class GroceriesApp {
         }
         spacing();
         Input response = new Input();
-        String userInput = response.getString("Type in the number of the category the item belongs in.");
+        int userInput = response.getInt("Type in the number of the category the item belongs in.");
         switch (userInput) {
-            case "1":
+            case 1:
                 return "Beverages";
-            case "2":
+            case 2:
                 return "Bread/Bakery";
-            case "3":
+            case 3:
                 return "Canned/Jarred Goods";
-            case "4":
+            case 4:
                 return "Dairy";
-            case "5":
+            case 5:
                 return "Baking Goods";
-            case "6":
+            case 6:
                 return "Frozen Goods";
-            case "7":
+            case 7:
                 return "Meat";
-            case "8":
+            case 8:
                 return "Produce";
-            case "9":
+            case 9:
                 return "Other";
             default:
                 System.out.println("Please enter a valid number from the categories list.");
@@ -104,24 +104,15 @@ public class GroceriesApp {
         if (thirdConfirm) {
             addList(shoppingList, count + 1, array, prompt);
         } else {
-            ArrayList<String> names = new ArrayList<>();
             Input response5 = new Input();
             boolean userConfirm = response5.yesNo("Would you like to filter your list by a category?[Y/N]");
+            ArrayList<String> names = new ArrayList<>();
             if (userConfirm) {
                 filterList(names, array, shoppingList);
             }
-           for (String category: array){
-                names.addAll(sortGrocery(shoppingList, category));
-            }
-            System.out.printf("%-15s|%-15s|%-20s|%-15s\n", "ID Number", "Item Name", "Category", "Quantity");
-            for (String name : names) {
-                for (int item : shoppingList.keySet()) {
-                    if (shoppingList.get(item).getName().equalsIgnoreCase(name)) {
-                        System.out.printf("%-15d|", item);
-                        printOut(shoppingList.get(item));
-                    }
-                }
-            }
+            listDisplay(array, names, shoppingList);
+            editList(array, names, shoppingList);
+
         }
     }
 
@@ -149,6 +140,7 @@ public class GroceriesApp {
         }
         if(compareArr.contains(inputCat)){
             System.out.printf("%-15s|%-15s|%-20s|%-15s\n", "ID Number", "Item Name", "Category", "Quantity");
+            spacing();
             names.addAll(sortGrocery(data, inputCat));
             for (String name : names) {
                 for (int item : data.keySet()) {
@@ -164,6 +156,7 @@ public class GroceriesApp {
             if (userConfirm2) {
                 filterList(names, array, data);
             } else {
+                editList(array, names, data);
                 System.out.println("Thank you! Have a wonderful day.");
                 System.exit(0);
             }
@@ -173,15 +166,73 @@ public class GroceriesApp {
         }
     }
 
-    public static void editList () {
+    public static void editList (ArrayList<String> array, ArrayList<String> names, HashMap<Integer, Grocery> groceryList) {
         Input response = new Input();
         boolean confirm = response.yesNo("Would you like to edit one of your list items?");
         if (confirm){
-            Input response2 = new Input();
-            int itemNum = response2.getInt("Which item number would you like to edit?");
+            theEdit(array, names, groceryList);
 
         }
 
     }
+
+    public static void theEdit (ArrayList<String> array, ArrayList<String> names, HashMap<Integer, Grocery> shoppingList) {
+        Input response2 = new Input();
+        int itemNum = response2.getInt("Enter the ID number of the item you would like to edit.");
+        if (shoppingList.containsKey(itemNum)){
+            editChoice(array, names, shoppingList, itemNum);
+        } else {
+            spacing();
+            System.out.println("Please enter a valid ID number for the grocery item you would like to edit.");
+            theEdit(array, names, shoppingList);
+        }
+    }
+    public static void editChoice (ArrayList<String> array, ArrayList<String> names, HashMap<Integer, Grocery> shoppingList, int itemNum){
+        Input response = new Input();
+        spacing();
+        String userResponse = response.getString("Would you like to edit the 'Name', 'Category' or 'Quantity?");
+            if(userResponse.equalsIgnoreCase("Name")){
+                shoppingList.get(itemNum).setName(response.getString("Enter the name for the grocery item."));
+                editRepeat(array,names,shoppingList );
+            } else if (userResponse.equalsIgnoreCase("Category")){
+                shoppingList.get(itemNum).setCategory(response.getString("Enter the category for the grocery item."));
+                editRepeat(array,names,shoppingList );
+            } else if (userResponse.equalsIgnoreCase("Quantity")){
+                shoppingList.get(itemNum).setQuantity(response.getInt("Enter the quantity for the grocery item."));
+                editRepeat(array,names,shoppingList );
+            } else {
+                System.out.println("Please type in 'Name', 'Category', or 'Quantity' to complete the edit.");
+                editChoice(array, names, shoppingList, itemNum);
+            }
+    }
+        public static void editRepeat (ArrayList<String> array, ArrayList<String> names, HashMap<Integer, Grocery> shoppingList){
+            Input response = new Input();
+            spacing();
+            boolean userConfirm = response.yesNo("Would you like to continue editing?");
+            if (userConfirm){
+                listDisplay(array, names, shoppingList);
+                theEdit(array, names, shoppingList);
+            }
+            listDisplay(array, names, shoppingList);
+
+
+        }
+        public static void listDisplay(ArrayList<String> array, ArrayList<String> names, HashMap<Integer, Grocery> shoppingList){
+            for (String category: array){
+                names.addAll(sortGrocery(shoppingList, category));
+            }
+            System.out.printf("%-15s|%-15s|%-20s|%-15s\n", "ID Number", "Item Name", "Category", "Quantity");
+            spacing();
+            for (String name : names) {
+                for (int item : shoppingList.keySet()) {
+                    if (shoppingList.get(item).getName().equalsIgnoreCase(name)) {
+                        System.out.printf("%-15d|", item);
+                        printOut(shoppingList.get(item));
+                    }
+                }
+            }
+            spacing();
+
+        }
 }
 
