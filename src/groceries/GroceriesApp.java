@@ -112,6 +112,7 @@ public class GroceriesApp {
             }
             listDisplay(array, names, shoppingList);
             editList(array, names, shoppingList);
+            listDisplay(array, names, shoppingList);
 
         }
     }
@@ -213,12 +214,13 @@ public class GroceriesApp {
                 listDisplay(array, names, shoppingList);
                 theEdit(array, names, shoppingList);
             }
-            listDisplay(array, names, shoppingList);
+            //listDisplay(array, names, shoppingList);
 
 
         }
         public static void listDisplay(ArrayList<String> array, ArrayList<String> names, HashMap<Integer, Grocery> shoppingList){
-            for (String category: array){
+        names.clear();
+        for (String category: array){
                 names.addAll(sortGrocery(shoppingList, category));
             }
             System.out.printf("%-15s|%-15s|%-20s|%-15s\n", "ID Number", "Item Name", "Category", "Quantity");
