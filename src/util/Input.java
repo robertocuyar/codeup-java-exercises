@@ -8,7 +8,6 @@ public class Input {
         this.scanner = new Scanner(System.in);
     }
     public String getString(){
-        //System.out.println("Type a response:");
         return scanner.nextLine();
     }
     public String getString(String prompt){
@@ -16,13 +15,8 @@ public class Input {
        return getString();
     }
     public boolean yesNo(){
-        //System.out.println("Enter y/N: ");
         String input = scanner.nextLine();
-        if(input.equalsIgnoreCase("y")|| input.equalsIgnoreCase("yes")){
-            return true;
-        } else {
-            return false;
-        }
+        return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes");
     }
     public boolean yesNo(String prompt) {
         System.out.println(prompt);
@@ -38,18 +32,46 @@ public class Input {
         }
     }
     public int getInt(){
+       String str = getString();
         try{
-            return scanner.nextInt();
+            return Integer.valueOf(str);
         }
-        catch (InputMismatchException e){
-            System.out.println("Please enter a valid number");
-            scanner.next();
+        catch (NumberFormatException e){
+            System.out.println("Please enter a valid integer value.");
             return getInt();
         }
         }
     public int getInt(String prompt) {
         System.out.println(prompt);
         return getInt();
+    }
+    public int getBinary(){
+        String userResponse = getString("Please enter a binary number: ");
+        if(userResponse.matches("[0-1]+")){
+            try {
+                return Integer.valueOf(userResponse, 2);
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+               return getBinary();
+            }
+        } else {
+            System.out.println("Please enter a valid binary number.");
+            return getBinary();
+        }
+    }
+    public int getHex () {
+        String userResponse = getString("Please enter a hexadecimal number: ");
+        if (userResponse.matches("[0-9a-fA-F]+")) {
+            try {
+                return Integer.valueOf(userResponse, 16);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return getHex();
+            }
+        } else {
+            System.out.println("Please enter a valid hexadecimal number.");
+            return getHex();
+        }
     }
     public double getDouble(double min, double max){
         System.out.println("Enter a number between " + min + " and " + max + ":");
@@ -61,8 +83,14 @@ public class Input {
         }
     }
     public double getDouble(){
-        //System.out.println("Enter a number :");
-        return scanner.nextDouble();
+        String str = getString();
+        try{
+            return Double.valueOf(str);
+        }
+        catch (NumberFormatException e){
+            System.out.println("Please enter a valid double value.");
+            return getDouble();
+        }
     }
     public double getDouble(String prompt) {
         System.out.println(prompt);

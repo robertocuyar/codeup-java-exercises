@@ -1,8 +1,12 @@
 import java.util.Scanner;
+import util.Input;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        String myString = "What?";
+Input test = new Input();
+            System.out.println(test.getHex());
+            String myString = "What?";
+
         float myNumber = 3.14F;
         System.out.println("Hello, World!");
         //System.out.println(myFavoriteNumber);
