@@ -58,7 +58,7 @@ public class GradesApplication {
         //updateAttendance(students);
        //System.out.println("Welcome!");
         //spacing();
-        //studentApp(students);
+        studentApp(students);
 
         System.out.println(johnny.absentSearch());
 
